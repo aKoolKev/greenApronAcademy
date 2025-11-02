@@ -252,7 +252,7 @@ export const holidayDrinks_2025_iced = [
     },
     {
         name: "Iced Gingerbread Chai",
-        steps: ['coldFoam', 'concentrate', 'concentrateAmount' 'syrup', 'syrupAmount', 'milk', 'milkAmount', 'hotWater', 'hotWaterAmount', 'topping', 'toppingAmount'],
+        steps: ['coldFoam', 'concentrate', 'concentrateAmount', 'syrup', 'syrupAmount', 'milk', 'milkAmount', 'hotWater', 'hotWaterAmount', 'topping', 'toppingAmount'],
         coldFoam: "Gingerbread Cream",
         concentrate: 'Chai',
         concentrateAmount: [3,4,6],
