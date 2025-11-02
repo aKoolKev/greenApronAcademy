@@ -1,6 +1,7 @@
 
 <script>
-    import {holidayDrinks_2025_hot} from "$lib/data/drinks.js";
+    import {allDrinks} from "$lib/data/drinks.js";
+    import {Button} from "flowbite-svelte";
 
     let drinkName = '';
     
@@ -10,15 +11,17 @@
     }
 
     function getDrink(){
-        drinkName = holidayDrinks_2025_hot[randNum(holidayDrinks_2025_hot.length)].name;
+        drinkName = allDrinks[randNum(allDrinks.length)].name;
     }
 </script>
 
-<main class="text-white">
-    <h1 class="font-bold uppercase text-3xl">Green Apron Academy</h1>
-    <button on:click={getDrink}>Get Drink</button>
-    <div>
-        <span>{drinkName}</span>
+<main class="text-white text-center">
+    <h1 class="font-bold uppercase text-4xl">Green Apron Academy</h1>
+
+    <div class="flex flex-col mt-15 border border-white w-1/2 mx-auto rounded-xl p-5">
+        <span class="font-bold text-lg">{drinkName}</span>
+        <Button onclick={getDrink} class="m-5 w-fit mx-auto" color="red">Get Drink</Button>
     </div>
+
 </main>
 

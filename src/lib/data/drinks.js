@@ -298,3 +298,5 @@ export const holidayDrinks_2025_iced = [
     }
 
 ];
+
+export const allDrinks = [...holidayDrinks_2025_hot, ...holidayDrinks_2025_iced];
