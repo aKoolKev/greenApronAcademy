@@ -1,7 +1,7 @@
 export const holidayDrinks_2025_hot = [
     {
         name: "Caramel Brulee Latte",
-        nameCode: "",
+        isHot: true,
 
         steps: ["espresso", "sauce", "milk", "whipped cream", "topping"],
 
@@ -19,7 +19,8 @@ export const holidayDrinks_2025_hot = [
     },
     {
         name: "Peppermint Mocha",
-        steps: ["espresso", "espressoAmount", "syrup", "syrupAmount", "sauce", "sauceAmount", "milk", "whippedCream", "topping", "toppingAmount"],
+        isHot: true,
+        steps: ["espresso", "syrup", "sauce", "milk", "whippedCream", "topping"],
         espresso: "Default",
         espressoAmount: [1,2,2,2],
         syrup: "Peppermint",
@@ -33,7 +34,8 @@ export const holidayDrinks_2025_hot = [
     },
     {
         name: "Peppermint Hot Chocolate",
-        steps: ["syrup", "syrupAmount", "sauce", "sauceAmount", "milk", "whippedCream", "topping", "toppingAmount"],
+        isHot: true,
+        steps: ["syrup", "sauce", "milk", "whippedCream", "topping"],
         syrup: "Peppermint",
         syrupAmount: [2,3,4,5],
         sauce: "Mocha",
@@ -45,7 +47,8 @@ export const holidayDrinks_2025_hot = [
     },
     {
         name: "Peppermint White Chocolate Mocha",
-        steps: ["espresso", "espressoAmount", "syrup", "syrupAmount", "sauce", "sauceAmount", "milk", "whippedCream", "topping", "toppingAmount"],
+        isHot: true,
+        steps: ["espresso", "syrup", "sauce", "milk", "whippedCream", "topping"],
         espresso: "Default",
         espressoAmount: [1,2,2,2],
         syrup: "Peppermint",
@@ -59,7 +62,8 @@ export const holidayDrinks_2025_hot = [
     },
     {
         name: "Peppermint White Hot Chocolate",
-        steps: ["syrup", "syrupAmount", "sauce", "sauceAmount", "milk", "whippedCream", "topping", "toppingAmount"],
+        isHot: true,
+        steps: ["syrup", "sauce", "milk", "whippedCream", "topping"],
         syrup: "Peppermint",
         syrupAmount: [2,3,4,5],
         sauce: "White Chocolate Mocha",
@@ -71,7 +75,8 @@ export const holidayDrinks_2025_hot = [
     },
     {
         name: "Gingerbread Latte",
-        steps: ['espresso', 'espressoAmount', 'syrup', 'syrupAmount', 'milk', 'whippedCream', 'topping', 'toppingAmount'],
+        isHot: true,
+        steps: ['espresso', 'syrup', 'milk', 'whippedCream', 'topping'],
         espresso: 'Default',
         espressoAmount: [1,1,2,2],
         syrup: "Gingerbread",
@@ -82,7 +87,8 @@ export const holidayDrinks_2025_hot = [
     },
     {
         name: "Gingerbread Chai",
-        steps: ['concentrate', 'concentrateAmount', 'syrup', 'syrupAmount', 'milk', 'milkAmount', 'hotWater', 'hotWaterAmount', 'topping', 'toppingAmount'],
+        isHot: true,
+        steps: ['concentrate', 'syrup', 'milk', 'milkAmount', 'hotWater', 'topping'],
         concentrate: "Chai",
         concentrateAmount: [2,3,4,6],
         syrup: "Gingerbread",
@@ -96,7 +102,8 @@ export const holidayDrinks_2025_hot = [
     },
     {
         name: "Sugar Cookie Latte",
-        steps: ['espresso', 'espressoAmount', 'syrup', 'syrupAmount', 'milk', 'topping', 'toppingAmount'],
+        isHot: true,
+        steps: ['espresso', 'syrup', 'milk', 'topping'],
         espresso: 'blonde',
         espressoAmount: [1,1,2,2],
         syrup: 'Sugar Cookie', 
@@ -112,7 +119,8 @@ export const holidayDrinks_2025_hot = [
 export const holidayDrinks_2025_iced = [
     {
         name: "Iced Caramel Brulee Latte",
-        nameCode: "",
+        isHot: false,
+        
 
         steps: ["espresso", "sauce", "milk", "whippedCream", "topping"],
 
@@ -130,7 +138,8 @@ export const holidayDrinks_2025_iced = [
     }, 
     {
         name: "Caramel Brulee Frappuccino Blended Coffee",
-        steps: ["frapRoast", "milk", "sauce", "sauceAmount","syrupBase", "whippedCream", "topping", "toppingAmount"],
+        isHot: false,
+        steps: ["frapRoast", "milk", "sauce","syrupBase", "whippedCream", "topping"],
         frapRoast: [2,3,4],
         milk: "whole",
         sauce: "Caramel Brulee",
@@ -143,7 +152,8 @@ export const holidayDrinks_2025_iced = [
     },
     {
         name: "Caramel Brulee Frappuccino Blended Creme",
-        steps: ["milk", "sauce", "sauceAmount","syrupBase", "whippedCream", "topping", "toppingAmount"],
+        isHot: false,
+        steps: ["milk", "sauce", "syrupBase", "whippedCream", "topping"],
         milk: "whole",
         sauce: "Caramel Brulee",
         sauceAmount: [1,2,2],
@@ -155,7 +165,8 @@ export const holidayDrinks_2025_iced = [
     },
     {
         name: "Iced Peppermint Mocha",
-        steps: ["espresso", "espressoAmount", "syrup", "syrupAmount", "sauce", "sauceAmount", "milk", "whippedCream", "topping", "toppingAmount"],
+        isHot: false,
+        steps: ["espresso", "syrup", "sauce", "milk", "whippedCream", "topping"],
         espresso: "Default",
         espressoAmount: [1,2,3],
         syrup: "Peppermint",
@@ -169,7 +180,8 @@ export const holidayDrinks_2025_iced = [
     }, 
     {
         name: "Peppermint Mocha Frappuccino Blended Coffee",
-        steps: ["frapRoast", "milk", "sauce", "sauceAmount", "syrup", "syrupAmount", "syrupBase", "syrupBaseAmount", "whippedCream", "topping", "toppingAmount"],
+        isHot: false,
+        steps: ["frapRoast", "milk", "sauce", "syrup", "syrupBase", "whippedCream", "topping"],
         frapRoast: [2,3,4],
         milk: "whole",
         sauce: "Mocha",
@@ -184,7 +196,8 @@ export const holidayDrinks_2025_iced = [
     },
     {
         name: "Peppermint Mocha Frappuccino Blended Creme",
-        steps: ["milk", "sauce", "sauceAmount", "syrup", "syrupAmount", "syrupBase", "syrupBaseAmount", "whippedCream", "topping", "toppingAmount"],
+        isHot: false,
+        steps: ["milk", "sauce", "syrup", "syrupBase", "whippedCream", "topping"],
         milk: "whole",
         sauce: "Mocha",
         sauceAmount: [1,2,2],
@@ -198,7 +211,8 @@ export const holidayDrinks_2025_iced = [
     },
     {
         name: "Iced Peppermint White Chocolate Mocha",
-        steps: ["espresso", "espressoAmount", "syrup", "syrupAmount", "sauce", "sauceAmount", "milk", "whippedCream", "topping", "toppingAmount"],
+        isHot: false,
+        steps: ["espresso", "syrup", "sauce", "milk", "whippedCream", "topping"],
         espresso: "Default",
         espressoAmount: [1,2,3],
         syrup: "Peppermint",
@@ -212,7 +226,8 @@ export const holidayDrinks_2025_iced = [
     },
     {
         name: "Peppermint White Chocolate Mocha Frappuccino Blended Coffee",
-        steps: ["frapRoast", "milk", "sauce", "sauceAmount", "syrup", "syrupAmount", "syrupBase", "syrupBaseAmount", "whippedCream", "topping", "toppingAmount"],
+        isHot: false,
+        steps: ["frapRoast", "milk", "sauce", "syrup", "syrupBase", "whippedCream", "topping"],
         frapRoast: [2,3,4],
         milk: "whole",
         sauce: "White Chocolate Mocha",
@@ -227,7 +242,8 @@ export const holidayDrinks_2025_iced = [
     },
     {
         name: "Peppermint White Chocolate Mocha Frappuccino Blended Creme",
-        steps: ["milk", "sauce", "sauceAmount", "syrup", "syrupAmount", "syrupBase", "syrupBaseAmount", "whippedCream", "topping", "toppingAmount"],
+        isHot: false,
+        steps: ["milk", "sauce", "syrup", "syrupBase", "whippedCream", "topping"],
         milk: "whole",
         sauce: "White Chocolate Mocha",
         sauceAmount: [1,2,2],
@@ -241,7 +257,8 @@ export const holidayDrinks_2025_iced = [
     },
     {
         name: "Iced Gingerbread Latte",
-        steps: ['espresso', 'espressoAmount', 'syrup', 'syrupAmount', 'milk', 'whippedCream', 'topping', 'toppingAmount'],
+        isHot: false,
+        steps: ['espresso', 'syrup', 'milk', 'whippedCream', 'topping'],
         espresso: 'Default',
         espressoAmount: [1,2,3],
         syrup: "Gingerbread",
@@ -252,7 +269,8 @@ export const holidayDrinks_2025_iced = [
     },
     {
         name: "Iced Gingerbread Chai",
-        steps: ['coldFoam', 'concentrate', 'concentrateAmount', 'syrup', 'syrupAmount', 'milk', 'milkAmount', 'hotWater', 'hotWaterAmount', 'topping', 'toppingAmount'],
+        isHot: false,
+        steps: ['coldFoam', 'concentrate', 'syrup', 'milk', 'milkAmount', 'hotWater', 'topping'],
         coldFoam: "Gingerbread Cream",
         concentrate: 'Chai',
         concentrateAmount: [3,4,6],
@@ -262,7 +280,8 @@ export const holidayDrinks_2025_iced = [
     },
     {
         name: "Iced Sugar Cookie Latte",
-        steps: ['espresso', 'espressoAmount', 'syrup', 'syrupAmount', 'milk', 'topping', 'toppingAmount'],
+        isHot: false,
+        steps: ['espresso', 'syrup', 'milk', 'topping'],
         espresso: 'blonde',
         espressoAmount: [1,2,3],
         syrup: 'Sugar Cookie', 
@@ -273,7 +292,8 @@ export const holidayDrinks_2025_iced = [
     },
     {
         name: "Sugar Cookie Frappuccino Blended Coffee",
-        steps: ["frapRoast", "milk", "syrup", "syrupAmount", "syrupBase", "syrupBaseAmount", "whippedCream", "topping", "toppingAmount"],
+        isHot: false,
+        steps: ["frapRoast", "milk", "syrup", "syrupBase", "whippedCream", "topping"],
         frapRoast: [2,3,4],
         milk: "whole",
         syrup: "Sugar Cookie",
@@ -286,7 +306,8 @@ export const holidayDrinks_2025_iced = [
     },
     {
         name: "Sugar Cookie Frappuccino Blended Creme",
-        steps: ["milk", "syrup", "syrupAmount", "syrupBase", "syrupBaseAmount", "whippedCream", "topping", "toppingAmount"],
+        isHot: false,
+        steps: ["milk", "syrup", "syrupBase", "whippedCream", "topping"],
         milk: "whole",
         syrup: "Sugar Cookie",
         syrupAmount: [1,2,2],
