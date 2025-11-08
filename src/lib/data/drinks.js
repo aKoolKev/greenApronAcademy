@@ -3,7 +3,7 @@ export const holidayDrinks_2025_hot = [
         name: "Caramel Brulee Latte",
         isHot: true,
 
-        steps: ["espresso", "sauce", "milk", "whipped cream", "topping"],
+        steps: ["espresso", "sauce", "milk", "whippedCream", "topping"],
 
         espresso: "Default",
         espressoAmount: [1,2,3,4],
@@ -270,7 +270,7 @@ export const holidayDrinks_2025_iced = [
     {
         name: "Iced Gingerbread Chai",
         isHot: false,
-        steps: ['coldFoam', 'concentrate', 'syrup', 'milk', 'milkAmount', 'hotWater', 'topping'],
+        steps: ['coldFoam', 'concentrate', 'milk', 'milkAmount', 'topping'],
         coldFoam: "Gingerbread Cream",
         concentrate: 'Chai',
         concentrateAmount: [3,4,6],
