@@ -109,7 +109,7 @@ export const holidayDrinks_2025_hot = [
         syrup: 'Sugar Cookie', 
         syrupAmount: [2,3,4,5],
         milk: '2%',
-        topping: 'Green and Red Sprinkles',
+        topping: 'Red and Green Sprinkles',
         toppingAmount: 3
     }
     
@@ -145,7 +145,7 @@ export const holidayDrinks_2025_iced = [
         sauce: "Caramel Brulee",
         sauceAmount: [1,2,2],
         syrupBase: "Coffee",
-        syrupAmount: [2,3,4],
+        syrupBaseAmount: [2,3,4],
         whippedCream: true,
         topping: "Caramel Brulee",
         toppingAmount: 3
@@ -158,7 +158,7 @@ export const holidayDrinks_2025_iced = [
         sauce: "Caramel Brulee",
         sauceAmount: [1,2,2],
         syrupBase: "Creme",
-        syrupAmount: [2,3,4],
+        syrupBaseAmount: [2,3,4],
         whippedCream: true,
         topping: "Caramel Brulee",
         toppingAmount: 3
@@ -200,7 +200,7 @@ export const holidayDrinks_2025_iced = [
         steps: ["milk", "sauce", "syrup", "syrupBase", "whippedCream", "topping"],
         milk: "Whole",
         sauce: "Mocha",
-        sauceAmount: [1,2,2],
+        sauceAmount: [2,3,4],
         syrup: "Peppermint",
         syrupAmount: [1,2,2],
         syrupBase: "Creme",
@@ -287,7 +287,7 @@ export const holidayDrinks_2025_iced = [
         syrup: 'Sugar Cookie', 
         syrupAmount: [3,4,6],
         milk: '2%',
-        topping: 'Green and Red Sprinkles',
+        topping: 'Red and Green Sprinkles',
         toppingAmount: 3
     },
     {

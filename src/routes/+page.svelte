@@ -1,22 +1,27 @@
 
 <script>
     import {allDrinks} from "$lib/data/drinks.js";
-    import {Button, Input, P, Select, Label, Heading, Dropdown, DropdownItem, select, Card} from "flowbite-svelte";
+    import {Button, Input, P, Select, Label, Heading, Dropdown, DropdownItem, Card} from "flowbite-svelte";
     import {ChevronDownOutline} from "flowbite-svelte-icons";
     import {onMount} from "svelte";
 
-    let drinkStep = '';
-    let randomDrink;
-    let drinkSize;
+    let randomDrink; //a random drink
+    let drinkStep; // a random step of the random drink
+    let drinkSize; // the size of the random drink
 
+    //used to populate the user responses for certain drink step
     let buttonAmount = [1,2,3,4,5,6];
     let toppingAmountBtn = [1,2,3];
     let espressoAmountBtn = [1,2,3,4];
     
 
     //user's response to the current question
-    let userResponse = "None";
-    let selectValue = '';
+    // let userResponse = "None"; 
+    let selectValue = ''; //for Select elements
+    let userResponseResult = false; //indicate if user answered correct or not
+
+    let multiPartQuestion = false; //if the question have several parts
+    let hideNextDrinkBtn = true;
 
     let coldFoams = [
         {value:"Gingerbread Cream", name:"Gingerbread"},
@@ -50,7 +55,7 @@
         { value: "Chocolate Curls", name: "Chocolate Curls" },
         { value: "Caramel", name: "Caramel" },
         { value: "Caramel Brulee", name: "Caramel Brulee" },
-        { value: "Green and Red Sprinkles", name: "Green and Red Sprinkles" },
+        { value: "Red and Green Sprinkles", name: "Red and Green Sprinkles" },
         { value: "Pecan Crunch", name: "Pecan crunch" },
         { value: "Pumpkin Spice", name: "Pumpkin Spice" },
         { value: "Cinnamon", name: "Cinnamon" },
@@ -73,61 +78,93 @@
         { value: "None", name: "None" },
     ];
 
-    $: if (selectValue!='') {
+
+    //checks user response on Select Elements
+    $: if (selectValue !== '') {
+        multiPartQuestion = true;
         if(drinkStep === "espresso") {
             if(selectValue === randomDrink.espresso)
-                alert("Correct!");
+                successMsg(true);
             else 
-                alert("Incorrect!");
+                successMsg(false);
         }
-        else if (drinkStep === "sauce" || "syrup" || "toppings") {
+        else if (drinkStep === "sauce" || "syrup" || "topping") {
             if (selectValue === randomDrink[drinkStep]) 
-                alert("Correct!");
+                successMsg(true);
             else 
-                alert ("Incorrect!");
+                successMsg(false);
         }
     }
 
+    //check user response when selecting with number valued buttons
     function checkAmount(userValue){
         //translate size text into corresponding index
-        let index=0;
-        if (drinkSize === "Grande") index=1;
-        else if (drinkSize === "Venti") index=2;
+        let index;
 
-        if (Number.isInteger(randomDrink[drinkStep][index])) {
-            if (userValue == randomDrink[drinkStep][index]) alert("Correct!");
-            else alert ("Incorrect!");
+        if (randomDrink.isHot) {
+            index=0; //Short
+            if (drinkSize === "Tall") index=1;
+            else if (drinkSize === "Grande") index=2;
+            else if (drinkSize === "Venti") index=3;
+        } else {
+            index = 0; // Tall
+            if (drinkSize === "Grande") index=1;
+            else if (drinkSize === "Venti") index=2;
         }
-        else { //must handle differently by selecting "<drinkStep>Amount"
-            if (userValue == randomDrink[drinkStep+'Amount'][index]) alert("Correct!");
-            else alert ("Incorrect!");
+
+        //<drinkStep>Amount = #
+            // toppingAmount
+        if (drinkStep === "topping"){
+            if (userValue === randomDrink[drinkStep+'Amount']) successMsg(true);
+            else successMsg(false);
+
+            
+        }
+        //<drinkStep> = [] 
+            //frapRoast
+        else if (drinkStep == "frapRoast"){
+            if (userValue == randomDrink[drinkStep][index]) successMsg(true);
+            else successMsg(false);
+        }
+        // //need to rewrite!
+        // if (Number.isInteger(randomDrink[drinkStep][index])) {
+        //     if (userValue == randomDrink[drinkStep][index]) successMsg(true);
+        //     else successMsg(false);
+        // }
+        else { // <drinkStep>Amount = [] 
+            //espresso, sauce, syrup, syrupBase, concentrate
+            if (userValue == randomDrink[drinkStep+'Amount'][index]) successMsg(true);
+            else successMsg(false);
         }
        
     }
-
+    
+    //check user response when answering with text value buttons
     function checkValue(userValue){
-        if(userValue === randomDrink[drinkStep]) alert("Correct!");
-        else alert("Incorrect!");
+        if(userValue === randomDrink[drinkStep]) successMsg(true);
+        else successMsg(false);
     }
 
-    function checkEspressoAmount(){
-        let index; 
 
-        //translate size into respective index
-        if (drinkSize === "Tall")
-            index = 0;
-        else if (drinkSize === "Grande")
-            index = 1;
-        else 
-            index = 2;
+    //user response feedback
+    function successMsg(val){
+        if (val) {
+            alert("Good Job!");
+            
+            if(multiPartQuestion && !userResponseResult) {
+                userResponseResult = true;
+            } 
+            else if (multiPartQuestion && userResponseResult) {
+                hideNextDrinkBtn = false;
+            } else {
+                // not multi Part Question => Show "Next Drink" btn immediately
+                hideNextDrinkBtn = false;
+            }
+        }
+        else
+            alert("Try Again!");
+    }
 
-        //check and handle user's response
-        alert(randomDrink.espressoAmount[index]);
-        if (userResponse == randomDrink.espressoAmount[index])
-            alert ("Correct!");
-        else 
-            alert ("Incorrect!");
-    } 
 
     // get and display a random drink when page hydrates
     onMount( ()=>{
@@ -172,7 +209,8 @@
         //TO-DO: pick random step to quiz
         drinkStep = randomDrink.steps[getRandNum(randomDrink.steps.length)];
         selectValue='';
-        //TO-DO: check user response
+        userResponseResult=false;
+        hideNextDrinkBtn = true;
     }
 </script>
 
@@ -210,13 +248,16 @@
                 </Label>
                 
                 <div class="m-5">
+                    {#if userResponseResult}
                     <Heading tag="h5" class="m-2 text-white">Espresso Amount</Heading>
                     <div>
                         {#each espressoAmountBtn as value}
                             <Button onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
                         {/each}
                     </div>
+                    {/if}
                 </div>
+
                 {:else if drinkStep === "milk"}
                     <Heading tag="h5" class="m-2 text-white">Select Milk</Heading>
                     <div class="m-2">
@@ -231,12 +272,14 @@
                     </Label>
 
                     <div class="m-5">
-                        <Heading tag="h5" class="m-2 text-white">Sauce Pump Amount</Heading>
-                        <div>
-                            {#each buttonAmount as value}
-                                <Button color="dark" onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
-                            {/each}
-                        </div>
+                        {#if userResponseResult}
+                            <Heading tag="h5" class="m-2 text-white">Sauce Pump Amount</Heading>
+                            <div>
+                                {#each buttonAmount as value}
+                                    <Button color="dark" onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
+                                {/each}
+                            </div>
+                        {/if}
                     </div>
                 {:else if drinkStep === "syrup"}
                     <Label>
@@ -245,12 +288,14 @@
                     </Label>
 
                     <div class="m-5">
-                        <Heading tag="h5" class="m-2 text-white">Syrup Pumps Amount</Heading>
-                        <div>
-                            {#each buttonAmount as value}
-                                <Button color="dark" onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
-                            {/each}
-                        </div>
+                        {#if userResponseResult}
+                            <Heading tag="h5" class="m-2 text-white">Syrup Pumps Amount</Heading>
+                            <div>
+                                {#each buttonAmount as value}
+                                    <Button color="dark" onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
+                                {/each}
+                            </div>
+                        {/if}
                     </div>
                 {:else if drinkStep === "whippedCream"}
                     <Heading tag="h5" class="m-2 text-white">Whipped Cream?</Heading>
@@ -258,17 +303,17 @@
                         <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50" onclick={
                             ()=>{
                                 if(true === randomDrink.whippedCream)
-                                    alert("Correct!");
+                                    successMsg(true);
                                 else
-                                    alert("Incorrect!");
+                                    successMsg(false);
                             }
                         }>Yes</Button>
                         <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50" onclick={
                             (e)=>{
                                 if(false === randomDrink.whippedCream)
-                                    alert("Correct!");
+                                    successMsg(true);
                                 else
-                                    alert("Incorrect!");
+                                    successMsg(false);
                             }
                         }>No</Button>
                     </div>
@@ -281,16 +326,18 @@
                     </Label>
 
                     <div class="m-5">
-                        <Heading tag="h5" class="text-white m-2">
-                            Topping Amount
-                        </Heading>
+                            {#if userResponseResult}
+                                <Heading tag="h5" class="text-white m-2">
+                                    Topping Amount
+                                </Heading>
 
-                        <div>
-                            {#each toppingAmountBtn as value}
-                                <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50 mr-1 mt-1" onclick={()=>checkAmount(value)}>{value}</Button>
-                            {/each}
+                                <div>
+                                    {#each toppingAmountBtn as value}
+                                        <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50 mr-1 mt-1" onclick={()=>checkAmount(value)}>{value}</Button>
+                                    {/each}
+                                </div>
+                            {/if}
                         </div>
-                    </div>
                 {:else if drinkStep === "syrupBase"}
                     <div>
                         <Heading tag="h5" class="m-2 text-white">Select Syrup Base</Heading>
@@ -304,7 +351,7 @@
                         <Heading tag="h5" class="m-2 text-white">Syrup Base Amount</Heading>
                         <div>
                             {#each buttonAmount as value}
-                                <Button color="dark" onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
+                                <Button onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
                             {/each}
                         </div>
                     </div>
@@ -331,14 +378,14 @@
                         <Heading tag="h5" class="m-2 text-white">Select Hot Water Amount</Heading>
                         <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50 mr-1 mt-1" value="1/2" onclick={
                             (e)=>{
-                                if(e.target.value === randomDrink.hotWaterAmount) alert("Correct!")
-                                else alert("Incorrect!");
+                                if(e.target.value === randomDrink.hotWaterAmount) successMsg(true);
+                                else successMsg(false);
                             }
                         }>1/2 cup</Button>
                         <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50 mr-1 mt-1" value="Full" onclick={
                             (e)=>{
-                                if(e.target.value === randomDrink.hotWaterAmount) alert("Correct!")
-                                else alert("Incorrect!");
+                                if(e.target.value === randomDrink.hotWaterAmount) successMsg(true);
+                                else successMsg(false);
                             }
                         }>Full cup</Button>
                     </div>
@@ -347,14 +394,14 @@
                         <Heading tag="h5" class="m-2 text-white">Select Milk Amount</Heading>
                         <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50 mr-1 mt-1" value="1/2" onclick={
                             (e)=>{
-                                if (e.target.value === randomDrink.milkAmount) alert ("Correct!");
-                                else alert("Incorrect!");
+                                if (e.target.value === randomDrink.milkAmount) successMsg(true);
+                                else successMsg(false);
                             }
                         }>1/2 cup</Button>
                         <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50 mr-1 mt-1" value="Full" onclick={
                             (e)=>{
-                                if (e.target.value === randomDrink.milkAmount) alert ("Correct!");
-                                else alert("Incorrect!");
+                                if (e.target.value === randomDrink.milkAmount) successMsg(true);
+                                else successMsg(false);
                             }
                         }>Full cup</Button>
                     </div>
@@ -371,14 +418,13 @@
 
         {/if}
     
+        {#if !hideNextDrinkBtn}
+            <Button onclick={getDrink} class="m-5 w-fit mx-auto bg-[#409dea] hover:bg-[#5b90bb]">Next Drink</Button>
+        {/if}
 
-        <Button onclick={getDrink} class="m-5 w-fit mx-auto" color="red">Get Drink</Button>
         <!-- <Button onclick={checkResponse} class="m-5 w-fit mx-auto" color="red">Check</Button> -->
     <!-- </div> -->
     </Card>    
     
 
 </main>
-
-<!-- syrup, sauce, chai, topping, espresso -->
-
