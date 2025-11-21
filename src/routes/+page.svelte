@@ -172,12 +172,13 @@
     }
 </script>
 
-<main class="text-white text-center">
+<main class= "text-center text-[#edf5f2]">
     <h1 class="font-bold uppercase text-4xl m-10">Green Apron Academy</h1>
 
     <!-- Possible Feature: Menu of game modes or drinks types to practice -->
 
-    <Card class="p-4 sm:p-6 md:p-8 bg-[#3B3230] mt-10 mx-auto shadow-lg shadow-black">
+    <!-- brown: bg-[#3B3230] -->
+    <Card class="p-4 sm:p-6 md:p-8 bg-[#946f56] mt-10 mx-auto shadow-lg shadow-black">
 
     
     <!-- <div class="flex flex-col mt-15 border border-white w-3/4 mx-auto rounded-xl p-5"> -->
@@ -198,7 +199,7 @@
             {#if drinkStep==="espresso"}
                 <!-- espresso type -->
                 <Label>
-                    <Heading tag="h5" class="m-2 text-white">Select Espresso Type</Heading>
+                    <Heading tag="h5" class="m-2">Select Espresso Type</Heading>
                     <Select class="mt-2"
                             items={espressos}
                             bind:value={selectValue}
@@ -207,10 +208,10 @@
                 
                 <div class="m-5">
                     {#if userResponseResult}
-                    <Heading tag="h5" class="m-2 text-white">Espresso Amount</Heading>
+                    <Heading tag="h5" class="m-2">Espresso Amount</Heading>
                     <div>
                         {#each espressoAmountBtn as value}
-                            <Button onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
+                            <Button onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2]">{value}</Button>
                         {/each}
                     </div>
                     {/if}
@@ -220,7 +221,7 @@
                     <Heading tag="h5" class="m-2 text-white">Select Milk</Heading>
                     <div class="m-2">
                         {#each milks as milk}
-                            <Button color="dark" class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50" onclick={()=>checkValue(milk.value)} >{milk.name}</Button>
+                            <Button color="dark" class="mr-1 mt-1 bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2]" onclick={()=>checkValue(milk.value)} >{milk.name}</Button>
                         {/each}
                     </div>
                 {:else if drinkStep === "sauce"}
@@ -234,7 +235,7 @@
                             <Heading tag="h5" class="m-2 text-white">Sauce Pump Amount</Heading>
                             <div>
                                 {#each buttonAmount as value}
-                                    <Button color="dark" onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
+                                    <Button color="dark" onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2]">{value}</Button>
                                 {/each}
                             </div>
                         {/if}
@@ -250,7 +251,7 @@
                             <Heading tag="h5" class="m-2 text-white">Syrup Pumps Amount</Heading>
                             <div>
                                 {#each buttonAmount as value}
-                                    <Button color="dark" onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
+                                    <Button color="dark" onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2]">{value}</Button>
                                 {/each}
                             </div>
                         {/if}
@@ -258,7 +259,7 @@
                 {:else if drinkStep === "whippedCream"}
                     <Heading tag="h5" class="m-2 text-white">Whipped Cream?</Heading>
                     <div class="m-2">
-                        <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50" onclick={
+                        <Button class="bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2]" onclick={
                             ()=>{
                                 if(true === randomDrink.whippedCream)
                                     successMsg(true);
@@ -266,7 +267,7 @@
                                     successMsg(false);
                             }
                         }>Yes</Button>
-                        <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50" onclick={
+                        <Button class="bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2]" onclick={
                             (e)=>{
                                 if(false === randomDrink.whippedCream)
                                     successMsg(true);
@@ -291,7 +292,7 @@
 
                                 <div>
                                     {#each toppingAmountBtn as value}
-                                        <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50 mr-1 mt-1" onclick={()=>checkAmount(value)}>{value}</Button>
+                                        <Button class="bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2] mr-1 mt-1" onclick={()=>checkAmount(value)}>{value}</Button>
                                     {/each}
                                 </div>
                             {/if}
@@ -300,8 +301,8 @@
                     <div>
                         <Heading tag="h5" class="m-2 text-white">Select Syrup Base</Heading>
                         <div>
-                            <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50" onclick={()=>checkValue("Creme")}>Creme</Button>
-                            <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50" onclick={()=>checkValue("Coffee")}>Coffee</Button>
+                            <Button class="bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2]" onclick={()=>checkValue("Creme")}>Creme</Button>
+                            <Button class="bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2]" onclick={()=>checkValue("Coffee")}>Coffee</Button>
                         </div>
                     </div>
 
@@ -310,7 +311,7 @@
                             <Heading tag="h5" class="m-2 text-white">Syrup Base Amount</Heading>
                             <div>
                                 {#each buttonAmount as value}
-                                    <Button onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
+                                    <Button onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2]">{value}</Button>
                                 {/each}
                             </div>
                         {/if}
@@ -320,7 +321,7 @@
                         <Heading tag="h5" class="m-2 text-white">Select {randomDrink.concentrate} Amount</Heading>
                         <div>
                             {#each buttonAmount as value}
-                                <Button color="dark" onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
+                                <Button color="dark" onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2]">{value}</Button>
                             {/each}
                         </div>
                     </div>
@@ -329,20 +330,20 @@
                         <Heading tag="h5" class="m-2 text-white">Select Frap Roast Amount</Heading>
                         <div>
                             {#each buttonAmount as value}
-                                <Button color="dark" onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
+                                <Button color="dark" onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2]">{value}</Button>
                             {/each}
                         </div>
                     </div>
                 {:else if drinkStep === "hotWater"}
                     <div>
                         <Heading tag="h5" class="m-2 text-white">Select Hot Water Amount</Heading>
-                        <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50 mr-1 mt-1" value="1/2" onclick={
+                        <Button class="bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2] mr-1 mt-1" value="1/2" onclick={
                             (e)=>{
                                 if(e.target.value === randomDrink.hotWaterAmount) successMsg(true);
                                 else successMsg(false);
                             }
                         }>1/2 cup</Button>
-                        <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50 mr-1 mt-1" value="Full" onclick={
+                        <Button class="bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2] mr-1 mt-1" value="Full" onclick={
                             (e)=>{
                                 if(e.target.value === randomDrink.hotWaterAmount) successMsg(true);
                                 else successMsg(false);
@@ -352,13 +353,13 @@
                 {:else if drinkStep === "milkAmount"}
                     <div>
                         <Heading tag="h5" class="m-2 text-white">Select Milk Amount</Heading>
-                        <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50 mr-1 mt-1" value="1/2" onclick={
+                        <Button class="bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2] mr-1 mt-1" value="1/2" onclick={
                             (e)=>{
                                 if (e.target.value === randomDrink.milkAmount) successMsg(true);
                                 else successMsg(false);
                             }
                         }>1/2 cup</Button>
-                        <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50 mr-1 mt-1" value="Full" onclick={
+                        <Button class="bg-[#50af63] text-[#3B3230] text-md font-bold hover:bg-[#edf5f2] mr-1 mt-1" value="Full" onclick={
                             (e)=>{
                                 if (e.target.value === randomDrink.milkAmount) successMsg(true);
                                 else successMsg(false);
@@ -379,7 +380,7 @@
         {/if}
     
         {#if !hideNextDrinkBtn}
-            <Button onclick={getDrink} class="m-5 w-fit mx-auto bg-[#409dea] hover:bg-[#5b90bb] animatation animate-pulse">Next Drink</Button>
+            <Button onclick={getDrink} class="m-5 w-fit mx-auto bg-[#50af63] hover:bg-[#edf5f2] text-black animatation animate-pulse">Next Drink</Button>
         {/if}
 
         <!-- <Button onclick={checkResponse} class="m-5 w-fit mx-auto" color="red">Check</Button> -->

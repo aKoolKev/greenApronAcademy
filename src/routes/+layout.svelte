@@ -21,6 +21,8 @@
 </svelte:head>
 
 
-<main class="bg-[#006241] min-h-screen p-5">
+<main class="bg-[#006241] min-h-screen p-5 text-[#edf5f2]">
 	{@render children?.()}
 </main>
+
+
