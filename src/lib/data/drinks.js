@@ -12,7 +12,7 @@ export const holidayDrinks_2025_hot = [
         sauceAmount: [2,3,4,5],
 
         milk: "2%",
-        whippedCreamed: true,
+        whippedCream: true,
         
         topping: "Caramel Brulee",
         toppingAmount: 3
@@ -76,12 +76,13 @@ export const holidayDrinks_2025_hot = [
     {
         name: "Gingerbread Latte",
         isHot: true,
-        steps: ['espresso', 'syrup', 'milk', 'topping'],
+        steps: ['espresso', 'syrup', 'milk', 'whippedCream', 'topping'],
         espresso: 'Default',
         espressoAmount: [1,1,2,2],
         syrup: "Gingerbread",
         syrupAmount: [2,3,4,5],
         milk: '2%',
+        whippedCream: true,
         topping: 'Pumpkin Spice',
         toppingAmount: 3
     },
@@ -264,6 +265,7 @@ export const holidayDrinks_2025_iced = [
         syrup: "Gingerbread",
         syrupAmount: [3,4,6],
         milk: '2%',
+        whippedCream: true,
         topping: 'Pumpkin Spice',
         toppingAmount: 3
     },

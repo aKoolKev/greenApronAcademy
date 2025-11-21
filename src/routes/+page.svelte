@@ -1,10 +1,15 @@
 
 <script>
+    //grabbing all the drink datas
     import {allDrinks} from "$lib/data/drinks.js";
+    import {coldFoams, espressos, milks, sauces, syrups, toppings} from "$lib/data/ingredients.js";
+
+    //using flowbite svelte kit components
     import {Button, Input, P, Select, Label, Heading, Dropdown, DropdownItem, Card} from "flowbite-svelte";
     import {ChevronDownOutline} from "flowbite-svelte-icons";
     import {onMount} from "svelte";
 
+    //global vars
     let randomDrink; //a random drink
     let drinkStep; // a random step of the random drink
     let drinkSize; // the size of the random drink
@@ -16,79 +21,31 @@
     
 
     //user's response to the current question
-    // let userResponse = "None"; 
+
     let selectValue = ''; //for Select elements
     let userResponseResult = false; //indicate if user answered correct or not
 
     let multiPartQuestion = false; //if the question have several parts
     let hideNextDrinkBtn = true;
 
-    let coldFoams = [
-        {value:"Gingerbread Cream", name:"Gingerbread"},
-        {value:"Vanilla Sweet Cream", name:"Vanilla Sweet Cream"},
-        {value:"Chocolate Cream", name:"Chocolate"},
-        {value:"Pumpkin Spice Cream", name:"Pumpkin Spice"},
-    ]
-
-    let espressos = [
-        {value:"Default", name:"Default"},
-        {value:"Blonde", name:"Blonde"},
-        {value:"Ristretto", name:"Ristretto"},
-        {value:"Blonde Ristretto", name:"Blonde Ristretto"}
-    ]
-
-    let milks = [
-        {value: "2%", name: "2%"},
-        {value: "Whole", name: "Whole"},
-        {value: "Oat", name: "Oat"},
-        {value: "Coconut", name: "Coconut"},
-    ]
-
-    let sauces = [
-        {value:"Mocha", name:"Mocha"},
-        {value:"White Chocolate Mocha", name:"White Chocolate Mocha"},
-        {value:"Caramel Brulee", name:"Caramel Brulee"},
-        {value:"Pumpkin Spice", name:"Pumpkin Spice"}
-    ]
-
-    let toppings = [
-        { value: "Chocolate Curls", name: "Chocolate Curls" },
-        { value: "Caramel", name: "Caramel" },
-        { value: "Caramel Brulee", name: "Caramel Brulee" },
-        { value: "Red and Green Sprinkles", name: "Red and Green Sprinkles" },
-        { value: "Pecan Crunch", name: "Pecan crunch" },
-        { value: "Pumpkin Spice", name: "Pumpkin Spice" },
-        { value: "Cinnamon", name: "Cinnamon" },
-        { value: "None", name: "None" },
-    ];
-
-    let syrups = [
-        { value: "Vanilla", name: "Vanilla" },
-        { value: "Sugar-free Vanilla", name: "Sugar-free Vanilla" },
-        { value: "Caramel", name: "Caramel" },
-        { value: "Pecan", name: "Pecan" },
-        { value: "Sugar Cookie", name: "Sugar Cookie" },
-        { value: "Cinnamon Dolce", name: "Cinnamon Dolce" },
-        { value: "Gingerbread", name: "Gingerbread" },
-        { value: "Brown Sugar", name: "Brown Sugar" },
-        { value: "Hazelnut", name: "Hazelnut" },
-        { value: "Honey Blend", name: "Honey Blend" },
-        { value: "Peppermint", name: "Peppermint" },
-        { value: "Classic", name: "Classic" },
-        { value: "None", name: "None" },
-    ];
-
 
     //checks user response on Select Elements
     $: if (selectValue !== '') {
-        multiPartQuestion = true;
+
         if(drinkStep === "espresso") {
             if(selectValue === randomDrink.espresso)
                 successMsg(true);
             else 
                 successMsg(false);
         }
+        else if (drinkStep === "coldFoam") {
+            if (selectValue === randomDrink[drinkStep]) 
+                successMsg(true);
+            else 
+                successMsg(false);
+        }
         else if (drinkStep === "sauce" || "syrup" || "topping") {
+            multiPartQuestion = true;
             if (selectValue === randomDrink[drinkStep]) 
                 successMsg(true);
             else 
@@ -116,23 +73,16 @@
             // toppingAmount
         if (drinkStep === "topping"){
             if (userValue === randomDrink[drinkStep+'Amount']) successMsg(true);
-            else successMsg(false);
-
-            
+            else successMsg(false); 
         }
         //<drinkStep> = [] 
             //frapRoast
-        else if (drinkStep == "frapRoast"){
+        else if (drinkStep === "frapRoast"){
             if (userValue == randomDrink[drinkStep][index]) successMsg(true);
             else successMsg(false);
         }
-        // //need to rewrite!
-        // if (Number.isInteger(randomDrink[drinkStep][index])) {
-        //     if (userValue == randomDrink[drinkStep][index]) successMsg(true);
-        //     else successMsg(false);
-        // }
         else { // <drinkStep>Amount = [] 
-            //espresso, sauce, syrup, syrupBase, concentrate
+            //espresso, sauce, syrup, syrupBaseAmount, concentrate
             if (userValue == randomDrink[drinkStep+'Amount'][index]) successMsg(true);
             else successMsg(false);
         }
@@ -141,14 +91,16 @@
     
     //check user response when answering with text value buttons
     function checkValue(userValue){
+        if (drinkStep === "syrupBase") multiPartQuestion = true;
+
         if(userValue === randomDrink[drinkStep]) successMsg(true);
-        else successMsg(false);
+            else successMsg(false);
     }
 
 
     //user response feedback
     function successMsg(val){
-        if (val) {
+        if (val) { //user answered correctly
             alert("Good Job!");
             
             if(multiPartQuestion && !userResponseResult) {
@@ -161,7 +113,7 @@
                 hideNextDrinkBtn = false;
             }
         }
-        else
+        else //user was incorrect
             alert("Try Again!");
     }
 
@@ -205,12 +157,18 @@
     function getDrink(){
         //display drink's name
         randomDrink = allDrinks[getRandNum(allDrinks.length)];
+
+        // get random drink size
         getRandDrinkSize();
-        //TO-DO: pick random step to quiz
+
+        // pick random drink step to quiz
         drinkStep = randomDrink.steps[getRandNum(randomDrink.steps.length)];
-        selectValue='';
-        userResponseResult=false;
+
+        // reset values for each drink 
+        selectValue ='';
+        userResponseResult = false;
         hideNextDrinkBtn = true;
+        multiPartQuestion = false;
     }
 </script>
 
@@ -346,14 +304,16 @@
                             <Button class="bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50" onclick={()=>checkValue("Coffee")}>Coffee</Button>
                         </div>
                     </div>
-                        
+
                     <div class="m-5">
-                        <Heading tag="h5" class="m-2 text-white">Syrup Base Amount</Heading>
-                        <div>
-                            {#each buttonAmount as value}
-                                <Button onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
-                            {/each}
-                        </div>
+                        {#if userResponseResult}
+                            <Heading tag="h5" class="m-2 text-white">Syrup Base Amount</Heading>
+                            <div>
+                                {#each buttonAmount as value}
+                                    <Button onclick={()=>checkAmount(value)} class="mr-1 mt-1 bg-[#CCAE88] text-[#3B3230] text-md font-bold hover:bg-amber-50">{value}</Button>
+                                {/each}
+                            </div>
+                        {/if}
                     </div>
                 {:else if drinkStep === "concentrate"}
                     <div class="m-2">
@@ -419,7 +379,7 @@
         {/if}
     
         {#if !hideNextDrinkBtn}
-            <Button onclick={getDrink} class="m-5 w-fit mx-auto bg-[#409dea] hover:bg-[#5b90bb]">Next Drink</Button>
+            <Button onclick={getDrink} class="m-5 w-fit mx-auto bg-[#409dea] hover:bg-[#5b90bb] animatation animate-pulse">Next Drink</Button>
         {/if}
 
         <!-- <Button onclick={checkResponse} class="m-5 w-fit mx-auto" color="red">Check</Button> -->
