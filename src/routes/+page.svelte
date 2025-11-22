@@ -14,6 +14,8 @@
     let drinkStep; // a random step of the random drink
     let drinkSize; // the size of the random drink
 
+    let numCorrectDrinks = 0; //current session number of correctly answered drinks (for score feature)
+
     //used to populate the user responses for certain drink step
     let buttonAmount = [1,2,3,4,5,6];
     let toppingAmountBtn = [1,2,3];
@@ -103,14 +105,17 @@
         if (val) { //user answered correctly
             alert("Good Job!");
             
-            if(multiPartQuestion && !userResponseResult) {
+            if(multiPartQuestion && !userResponseResult) { //multi part question
                 userResponseResult = true;
             } 
-            else if (multiPartQuestion && userResponseResult) {
+            else if (multiPartQuestion && userResponseResult) { //user answered all multi part correctly
+                numCorrectDrinks++;
                 hideNextDrinkBtn = false;
+
             } else {
                 // not multi Part Question => Show "Next Drink" btn immediately
                 hideNextDrinkBtn = false;
+                numCorrectDrinks++; //update score
             }
         }
         else //user was incorrect
@@ -177,6 +182,15 @@
 
     <!-- Possible Feature: Menu of game modes or drinks types to practice -->
 
+
+    <!-- SCORE FEATURE: displays current number of correct drink cards this session -->
+    <div class="my-4">
+        <h1 class="text-lg font-bold">
+            SCORE: 
+            <span class="text-2xl"> {numCorrectDrinks}</span>
+        </h1>
+    </div>
+    
     <!-- brown: bg-[#3B3230] -->
     <Card class="p-4 sm:p-6 md:p-8 bg-[#946f56] mt-10 mx-auto shadow-lg shadow-black">
 
@@ -387,5 +401,5 @@
     <!-- </div> -->
     </Card>    
     
-
+   
 </main>
